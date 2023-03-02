@@ -1,4 +1,10 @@
-This is demonstrating dependencies working in MSBuild at the command line, but not in Visual Studio. As far as I can tell, the issue is sub-dependencies, e.g. A (.csproj/.proj) refs B (.vcxproj) which refs C (.vcxproj). In Visual Studio B is detected as a dependency for A, but C is not detected as a dependency for anything, so we have a cascading build failure because C wasn't allowed to produce output in time. This results in:
+This is demonstrating dependencies working in MSBuild at the command line, but not in Visual Studio. As far as I can tell, the issue is sub-dependencies, for example:
+
+- A (.csproj/.proj) 
+  - ProjectReference to B (.vcxproj)
+    - ProjectReference to C (.vcxproj)
+
+In Visual Studio `B` is detected as a dependency for `A`, but `C` is not detected as a dependency for anything, so we have a cascading build failure because `C` wasn't allowed to produce output in time. This results in:
 ```
 Severity	Code	Description	Project	File	Line	Suppression State
 Warning	MSB8028	The intermediate directory (x64\Debug\) contains files shared from another project (Dependency.vcxproj).  This can lead to incorrect clean and rebuild behavior.	SubDependency	C:\Program Files\Microsoft Visual Studio\2022\Enterprise\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets	517	
