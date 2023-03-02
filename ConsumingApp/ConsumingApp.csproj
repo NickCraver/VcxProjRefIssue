@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net472</TargetFramework>
+    <SkipCopyBuildProduct>true</SkipCopyBuildProduct>
+    <GenerateAdditionalSources>false</GenerateAdditionalSources>
+    <SatelliteResourceLanguages>en</SatelliteResourceLanguages>
+    <UseCommonOutputDirectory>false</UseCommonOutputDirectory>
+    <OutDir>$(HostingDestination)</OutDir>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <!-- This is to make Dependency.dll appear in our output directory -->
+    <ProjectReference Include="..\Dependency\Dependency.vcxproj"
+                      ReferenceOutputAssembly="false"
+                      OutputItemType="Content"
+                      CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+</Project>
